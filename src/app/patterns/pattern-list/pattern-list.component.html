@@ -1,0 +1,14 @@
+<div *ngIf="(patterns$ | async) as patterns; else loading">
+    <div *ngFor="let pattern of patterns">
+        <div>
+            {{ pattern.title }}
+            <img [src]="pattern.image" />
+        </div>
+        <button pButton label="delete" (click)="onDelete(pattern.id)"></button>
+    </div>
+</div>
+<ng-template #loading>loading</ng-template>
+
+<p-fileUpload name="uploadAvatar" [customUpload]="true" [auto]="true" (uploadHandler)="onFileUploadClicked($event)"
+    accept="image/*" [maxFileSize]="500000">
+</p-fileUpload>

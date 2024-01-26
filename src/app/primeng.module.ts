@@ -1,13 +1,16 @@
 import { NgModule } from "@angular/core";
 
 import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
     imports: [
-        ButtonModule
+        ButtonModule,
+        FileUploadModule
     ],
     exports: [
-        ButtonModule
+        ButtonModule,
+        FileUploadModule
     ]
 })
-export class PrimeNGModule {}
+export class PrimeNGModule { }
