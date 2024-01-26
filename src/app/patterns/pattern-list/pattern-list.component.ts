@@ -11,17 +11,7 @@ import { FileUpload } from "primeng/fileupload";
 })
 export class PatternListComponent implements OnInit {
     patterns$: Observable<Pattern[]> | undefined;
-    model = new Pattern();/*{
-        author: '',
-        category: 1,
-        craftType: 1,
-        description: '',
-        id: 0,
-        image: '',
-        languages: [],
-        title: '',
-    };*/
-    @ViewChild('imageInput', { static: false }) imageInput: FileUpload | undefined;
+    model = new Pattern();
 
     constructor(private patternService: PatternService) { }
 
