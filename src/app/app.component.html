@@ -1,3 +1,17 @@
 <div>
-  <pattern-list></pattern-list>
+  <p-toolbar styleClass="yarn-world-toolbar shadow-2">
+    <ng-template pTemplate="start">
+      <img src="assets/images/logo.png" />
+      <h1 class="yarn-world-toolbar-logo-title">Yarn World</h1>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-2">
+        <span class="font-bold text-bluegray-50">Amy Elsner</span>
+        <p-avatar icon="pi pi-user" shape="circle" />
+      </div>
+    </ng-template>
+  </p-toolbar>
+  <div class="yarn-world-content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

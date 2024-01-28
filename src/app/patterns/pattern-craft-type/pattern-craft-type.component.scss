@@ -1,0 +1,6 @@
+.pattern-craft-type {
+    ::ng-deep .p-chip {
+        background-color: var(--backgroundColor, var(--primary-50));
+        color: var(--color, var(--primary-300));
+    }
+}

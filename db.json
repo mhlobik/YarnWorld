@@ -9,10 +9,7 @@
       "craftType": 1,
       "category": 1,
       "patternUrl": "https://www.hookedbyrobin.com/blog/2019/03/amigurumi-bumblebee-free-crochet.html",
-      "publishedDate": "2018-03-15",
-      "languages": [
-        "en"
-      ]
+      "publishedDate": "2018-03-15"
     },
     {
       "id": "2",
@@ -23,10 +20,7 @@
       "craftType": 2,
       "category": 4,
       "patternUrl": "https://5knotsnorth.blogspot.com/2018/08/the-lakeside-beanie.html",
-      "publishedDate": "2018-08-10",
-      "languages": [
-        "en"
-      ]
+      "publishedDate": "2018-08-10"
     }
   ]
 }

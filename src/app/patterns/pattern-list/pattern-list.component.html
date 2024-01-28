@@ -1,14 +1,18 @@
-<div *ngIf="(patterns$ | async) as patterns; else loading">
-    <div *ngFor="let pattern of patterns">
-        <div>
-            {{ pattern.title }}
-            <img [src]="pattern.image" />
+<div [hidden]="outlet.isActivated">
+    <div class="yarn-world-search flex flex-wrap justify-content-center gap-3 pb-3">
+        <span class="p-input-icon-right w-full">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText class="w-full" />
+        </span>
+    </div>
+    <div class="yarn-world-patterns-card">
+        <div *ngIf="(patterns$ | async) as patterns; else loading" class="grid m-0 gap-3">
+            <div class="p-m-2 flex gap-3" *ngFor="let pattern of patterns">
+                <pattern-card [pattern]="pattern"></pattern-card>
+            </div>
         </div>
-        <button pButton label="delete" (click)="onDelete(pattern.id)"></button>
+
+        <ng-template #loading>loading</ng-template>
     </div>
 </div>
-<ng-template #loading>loading</ng-template>
-
-<p-fileUpload name="uploadAvatar" [customUpload]="true" [auto]="true" (uploadHandler)="onFileUploadClicked($event)"
-    accept="image/*" [maxFileSize]="500000">
-</p-fileUpload>
+<router-outlet #outlet="outlet"></router-outlet>

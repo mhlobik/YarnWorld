@@ -1,0 +1,15 @@
+.yarn-world-patterns-card {
+    .pattern-card {
+        height: 6.25;
+    }
+
+    .pattern-card-title {
+        color: var(--primary-500);
+    }
+}
+
+:host ::ng-deep .p-panel .p-panel-footer {
+    border: 1px solid var(--primary-500);
+    background: var(--primary-500);
+    padding: 0px;
+}
