@@ -1,0 +1,31 @@
+<div *ngIf="pattern && pattern.id !== 0" class="yarn-world-patterns-card grid">
+    <div class="pattern-details md:col-8 col-12 pr-5">
+        <div class="pattern-details-info flex flex-wrap align-items-center justify-content-between">
+            <h1 class="text-primary">{{pattern.title}}</h1>
+            <div *ngIf="pattern.patternUrl" class="text-primary">
+                <button pButton pRipple icon="pi pi-globe" label="Hook me with a pattern!"
+                    (click)="navigateToPublishedUrl(pattern.patternUrl)"></button>
+            </div>
+        </div>
+        <p class="text-primary-900 flex flex-wrap gap-3">
+            <span [pTooltip]="'Published by ' + pattern.author" tooltipPosition="top">
+                <i class="pi pi-user"></i>
+                {{pattern.author}}
+            </span>
+            <span pTooltip="Published on  + {{pattern.publishedDate| date: 'mm yyyy'}}" tooltipPosition="top">
+                <i class="pi pi-calendar"></i>
+                {{pattern.publishedDate | date:'MMMM yyyy'}}
+            </span>
+        </p>
+        <hr class="pattern-details-divider my-3" />
+        <div class="flex gap-3">
+            <pattern-craft-type [type]="pattern.craftType"></pattern-craft-type>
+            <pattern-category [category]="pattern.category"></pattern-category>
+        </div>
+        <p class="text-primary-900">{{pattern.description}}</p>
+    </div>
+    <div class="pattern-details-image md:col-4 col-12">
+        <img class="shadow-2" src="{{ pattern.image }}" alt="{{ pattern.title }}" [style]="{ 'width': '100%' }"
+            onerror="src='assets/images/no-image.png'">
+    </div>
+</div>

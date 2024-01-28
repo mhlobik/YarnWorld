@@ -11,5 +11,4 @@ export class Pattern {
     category?: CategoryEnum;
     patternUrl?: string;
     publishedDate?: Date;
-    languages?: string[];
 }

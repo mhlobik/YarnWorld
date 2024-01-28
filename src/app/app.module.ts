@@ -7,17 +7,27 @@ import { PrimeNGModule } from './primeng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PatternService } from './shared/services/pattern.service';
 import { PatternListComponent } from './patterns/pattern-list/pattern-list.component';
+import { PatternCardComponent } from './patterns/pattern-card/pattern-card.component';
+import { PatternAddComponent } from './patterns/pattern-add/pattern-add.component';
+import { PatternDetailsComponent } from './patterns/pattern-details/pattern-details.component';
+import { PatternCategoryComponent } from './patterns/pattern-category/pattern-category.component';
+import { PatternCraftTypeComponent } from './patterns/pattern-craft-type/pattern-craft-type.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatternListComponent
+    PatternListComponent,
+    PatternCardComponent,
+    PatternAddComponent,
+    PatternDetailsComponent,
+    PatternCategoryComponent,
+    PatternCraftTypeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PrimeNGModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     PatternService
