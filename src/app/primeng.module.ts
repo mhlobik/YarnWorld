@@ -12,6 +12,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { ChipModule } from 'primeng/chip';
 import { TooltipModule } from 'primeng/tooltip';
+import { MenuModule } from 'primeng/menu';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
     imports: [
@@ -26,7 +35,16 @@ import { TooltipModule } from 'primeng/tooltip';
         InputTextModule,
         DividerModule,
         ChipModule,
-        TooltipModule
+        TooltipModule,
+        MenuModule,
+        TableModule,
+        ConfirmDialogModule,
+        DialogModule,
+        RadioButtonModule,
+        ToastModule,
+        DropdownModule,
+        InputTextareaModule,
+        SidebarModule
     ],
     exports: [
         ButtonModule,
@@ -40,7 +58,16 @@ import { TooltipModule } from 'primeng/tooltip';
         InputTextModule,
         DividerModule,
         ChipModule,
-        TooltipModule
+        TooltipModule,
+        MenuModule,
+        TableModule,
+        ConfirmDialogModule,
+        DialogModule,
+        RadioButtonModule,
+        ToastModule,
+        DropdownModule,
+        InputTextareaModule,
+        SidebarModule
     ]
 })
 export class PrimeNGModule { }

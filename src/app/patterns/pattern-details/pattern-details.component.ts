@@ -9,8 +9,8 @@ import { ActivatedRoute } from "@angular/router";
     styleUrl: './pattern-details.component.scss'
 })
 export class PatternDetailsComponent implements OnInit {
-    id = 0;
-    pattern = new Pattern();
+    id!: string;
+    pattern!: Pattern;
 
     constructor(
         private patternService: PatternService,

@@ -1,0 +1,75 @@
+<p-sidebar [(visible)]="openPatternDialog" [modal]="true" position="right" [dismissible]="false"
+    styleClass="p-fluid pattern-add-edit-sidebar" (onHide)="hideDialog()">
+    <ng-template pTemplate="header">
+        <h1 *ngIf="isEdit">Edit Pattern Details</h1>
+        <h1 *ngIf="!isEdit">Add Pattern Details</h1>
+    </ng-template>
+    <ng-template *ngIf="pattern" pTemplate="content">
+        <div class="field">
+            <div *ngIf="pattern.image" class="field flex align-items-start justify-content-center">
+                <img [src]="pattern.image" [alt]="pattern.image" class="col-6" *ngIf="pattern.image" />
+                <button pButton class="p-button-rounded -ml-6" icon="pi pi-times" (click)="pattern.image=''"></button>
+            </div>
+            <div *ngIf="!pattern.image">
+                <p-fileUpload #imageFile name="uploadAvatar" [customUpload]="true" [auto]="true"
+                    (uploadHandler)="fileUploadClicked($event)" accept="image/*" [maxFileSize]="500000">
+                </p-fileUpload>
+                <small class="p-error" *ngIf="submitted && !pattern.image">Image is required.</small>
+            </div>
+        </div>
+        <div class="field">
+            <label for="title">Title</label>
+            <input type="text" pInputText id="title" [(ngModel)]="pattern.title" required />
+            <small class="p-error" *ngIf="submitted && !pattern.title">Title is required.</small>
+        </div>
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="pattern.description" required rows="3"
+                cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !pattern.description">Description is required.</small>
+        </div>
+        <div class="field">
+            <label for="author">Author</label>
+            <input type="text" pInputText id="author" [(ngModel)]="pattern.author" required />
+            <small class="p-error" *ngIf="submitted && !pattern.author">Author is required.</small>
+        </div>
+        <div class="field">
+            <label for="patternUrl">Pattern Url</label>
+            <input type="text" pInputText id="patternUrl" [(ngModel)]="pattern.patternUrl" />
+            <small class="p-error" *ngIf="submitted && !pattern.patternUrl">Url is required.</small>
+        </div>
+        <div class="field">
+            <label>Craft Type</label>
+            <div class="formgrid grid">
+                <div *ngFor="let craftType of craftTypes; " class="field-radiobutton col-6">
+                    <p-radioButton [id]="craftType.id" name="craftType" [value]="craftType.enum"
+                        [(ngModel)]="pattern.craftType"></p-radioButton>
+                    <label>{{craftType.label}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="category">Category</label>
+            <p-dropdown [(ngModel)]="selectedPatternCategory" inputId="category" [options]="categories"
+                (ngModelChange)="patternCategoryChanged($event)">
+                <ng-template pTemplate="selectedItem">
+                    <pattern-category *ngIf="selectedPatternCategory"
+                        [category]="selectedPatternCategory.enum"></pattern-category>
+                </ng-template>
+                <ng-template let-option pTemplate="item">
+                    <pattern-category [category]="option.enum"></pattern-category>
+                </ng-template>
+            </p-dropdown>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="flex">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+                (click)="hideDialog()"></button>
+
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-primary"
+                [disabled]="loading || error" (click)="savePattern()"></button>
+        </div>
+    </ng-template>
+</p-sidebar>
