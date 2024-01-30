@@ -21,6 +21,7 @@ import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SidebarModule } from 'primeng/sidebar';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { SidebarModule } from 'primeng/sidebar';
         ToastModule,
         DropdownModule,
         InputTextareaModule,
-        SidebarModule
+        SidebarModule,
+        SkeletonModule
     ],
     exports: [
         ButtonModule,
@@ -67,7 +69,8 @@ import { SidebarModule } from 'primeng/sidebar';
         ToastModule,
         DropdownModule,
         InputTextareaModule,
-        SidebarModule
+        SidebarModule,
+        SkeletonModule
     ]
 })
 export class PrimeNGModule { }
