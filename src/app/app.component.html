@@ -1,13 +1,17 @@
 <div>
   <p-toolbar styleClass="yarn-world-toolbar shadow-2">
     <ng-template pTemplate="start">
-      <img src="assets/images/logo.png" />
-      <h1 class="yarn-world-toolbar-logo-title">Yarn World</h1>
+      <a href="patterns" class="flex align-items-center text-primary-100 no-underline">
+        <img src="assets/images/logo.png" />
+        <h1 class="yarn-world-toolbar-logo-title">Yarn World</h1>
+      </a>
     </ng-template>
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
         <span class="font-bold text-bluegray-50">Amy Elsner</span>
-        <p-avatar icon="pi pi-user" shape="circle" />
+        <button pButton class="p-button-rounded p-nutton-text p-button-raised p-button-neutral" icon="pi pi-user"
+          (click)="menu.toggle($event)"></button>
+        <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
       </div>
     </ng-template>
   </p-toolbar>

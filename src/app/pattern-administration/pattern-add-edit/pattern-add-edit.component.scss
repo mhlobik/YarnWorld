@@ -1,0 +1,9 @@
+.pattern-add-edit-sidebar {
+    width: 35rem;
+}
+
+@media screen and (max-width: 375px) {
+    .pattern-add-edit-sidebar {
+        width: 100%;
+    }
+}

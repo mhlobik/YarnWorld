@@ -1,14 +1,13 @@
-import { CategoryEnum } from "./category";
-import { CraftTypeEnum } from "./craft-type";
+import { PatternCategoryEnum } from "./pattern-category";
+import { PatternCraftTypeEnum } from "./pattern-craft-type";
 
 export class Pattern {
-    id: number = 0;
-    title: string | undefined;
-    description: string | undefined;
-    author: string | undefined;
-    image: string | undefined;
-    craftType?: CraftTypeEnum;
-    category?: CategoryEnum;
+    id!: string;
+    title!: string;
+    description!: string;
+    author!: string;
+    image!: string;
+    craftType!: PatternCraftTypeEnum;
+    category!: PatternCategoryEnum;
     patternUrl?: string;
-    publishedDate?: Date;
 }

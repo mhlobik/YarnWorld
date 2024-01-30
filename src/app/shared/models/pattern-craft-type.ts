@@ -1,4 +1,4 @@
-export enum CraftTypeEnum {
+export enum PatternCraftTypeEnum {
     Knitting = 1,
     Crochet,
     MachineKnitting,

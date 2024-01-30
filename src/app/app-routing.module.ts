@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PrimeNGModule } from './primeng.module';
 import { PatternListComponent } from './patterns/pattern-list/pattern-list.component';
 import { PatternDetailsComponent } from './patterns/pattern-details/pattern-details.component';
-import { PatternAdministrationComponent } from './patterns/pattern-administration/pattern-administration.component';
+import { PatternAdministrationComponent } from './pattern-administration/pattern-administration.component';
 
 const routes: Routes = [
   {

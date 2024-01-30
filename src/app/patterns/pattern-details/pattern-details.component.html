@@ -1,4 +1,4 @@
-<div *ngIf="pattern && pattern.id !== 0" class="yarn-world-patterns-card grid">
+<div *ngIf="pattern && pattern.id" class="yarn-world-patterns-card grid">
     <div class="pattern-details md:col-8 col-12 pr-5">
         <div class="pattern-details-info flex flex-wrap align-items-center justify-content-between">
             <h1 class="text-primary">{{pattern.title}}</h1>
@@ -11,10 +11,6 @@
             <span [pTooltip]="'Published by ' + pattern.author" tooltipPosition="top">
                 <i class="pi pi-user"></i>
                 {{pattern.author}}
-            </span>
-            <span pTooltip="Published on  + {{pattern.publishedDate| date: 'mm yyyy'}}" tooltipPosition="top">
-                <i class="pi pi-calendar"></i>
-                {{pattern.publishedDate | date:'MMMM yyyy'}}
             </span>
         </p>
         <hr class="pattern-details-divider my-3" />

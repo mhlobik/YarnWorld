@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, throwError } from "rxjs";
+import { Observable, catchError, of, throwError } from "rxjs";
 import { Pattern } from "../models/pattern";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class PatternService {
         );
     }
 
-    getPattern(id: number): Observable<Pattern> {
+    getPattern(id: string): Observable<Pattern> {
         return this.http.get(this.apiPath + '/' + id).pipe(
             catchError((error: any, caught: Observable<any>) => {
                 return throwError(() => error);
@@ -25,7 +25,7 @@ export class PatternService {
         );
     }
 
-    updatePattern(model: Pattern) {
+    updatePattern(model: Pattern): Observable<any> {
         return this.http.put(this.apiPath + '/' + model.id, model).pipe(
             catchError((error: any, caught: Observable<any>) => {
                 return throwError(() => error);
@@ -33,7 +33,15 @@ export class PatternService {
         );
     }
 
-    deletePattern(id: number) {
+    createPattern(model: Pattern): Observable<any> {
+        return this.http.post(this.apiPath, model).pipe(
+            catchError((error: any, caught: Observable<any>) => {
+                return throwError(() => error);
+            })
+        );
+    }
+
+    deletePattern(id: string): Observable<any> {
         return this.http.delete(this.apiPath + '/' + id).pipe(
             catchError((error: any, caught: Observable<any>) => {
                 return throwError(() => error);

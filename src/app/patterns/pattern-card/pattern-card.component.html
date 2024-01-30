@@ -1,12 +1,16 @@
 <p-panel styleClass="pattern-card" [style]="{ 'width': '15rem' }">
     <ng-template pTemplate="header">
-        <h3 class="pattern-card-title m-0">{{ pattern.title }}</h3>
+        <h3 class="pattern-card-title m-0 yarn-world-text-ellipsis" [pTooltip]="pattern.title">{{ pattern.title }}</h3>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="flex justify-content-center align-items-center">
+            <img src="{{ pattern.image }}" alt="{{ pattern.title }}"
+                [style]="{ 'max-width': '100%', 'height': '12rem' }" onerror="src='assets/images/no-image.png'">
+        </div>
     </ng-template>
     <ng-template pTemplate="footer">
         <div class="pattern-card-view-details-btn">
             <button pButton class="w-full" label="View Details" (click)="onViewDetails()"></button>
         </div>
     </ng-template>
-    <img src="{{ pattern.image }}" alt="{{ pattern.title }}" [style]="{ 'max-width': '100%', 'height': '12rem' }"
-        onerror="src='assets/images/no-image.png'">
 </p-panel>
