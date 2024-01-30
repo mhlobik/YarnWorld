@@ -1,18 +1,37 @@
 <div [hidden]="outlet.isActivated">
     <div class="yarn-world-search flex flex-wrap justify-content-center gap-3 pb-3">
-        <span class="p-input-icon-right w-full">
+        <span class="p-input-icon-left w-full">
             <i class="pi pi-search"></i>
-            <input type="text" pInputText class="w-full" />
+            <input type="search" pInputText class="w-full" [(ngModel)]="searchValue"
+                (ngModelChange)="searchPatterns()" />
         </span>
     </div>
     <div class="yarn-world-patterns-card">
-        <div *ngIf="(patterns$ | async) as patterns; else loading" class="grid m-0 gap-3">
-            <div class="p-m-2 flex gap-3" *ngFor="let pattern of patterns">
-                <pattern-card [pattern]="pattern"></pattern-card>
-            </div>
-        </div>
 
-        <ng-template #loading>loading</ng-template>
+        <ng-container *ngIf="(patterns$ | async) as patterns">
+            <div *ngIf="!patterns.loading; else loading">
+                <div *ngIf="patterns.result.length > 0; else noResult" class="grid m-0 gap-3">
+                    <div class="p-m-2 flex gap-3" *ngFor="let pattern of patterns.result">
+                        <pattern-card [pattern]="pattern"></pattern-card>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-template #noResult>
+            <div class="text-primary-900 flex flex-column align-items-center justify-content-center m-3">
+                <i class="yarn-world-patterns-no-result pi pi-file"></i>
+                <h1>No patterns found</h1>
+            </div>
+        </ng-template>
+        <ng-template #loading>
+            <div class="flex flex-wrap gap-3 ">
+                <p-skeleton [width]="'10rem'" [height]="'15rem'" styleClass="bg-primary-50"></p-skeleton>
+                <p-skeleton [width]="'10rem'" [height]="'15rem'" styleClass="bg-primary-50"></p-skeleton>
+                <p-skeleton [width]="'10rem'" [height]="'15rem'" styleClass="bg-primary-50"></p-skeleton>
+                <p-skeleton [width]="'10rem'" [height]="'15rem'" styleClass="bg-primary-50"></p-skeleton>
+            </div>
+        </ng-template>
     </div>
 </div>
 <router-outlet #outlet="outlet"></router-outlet>
