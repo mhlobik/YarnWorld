@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, switchMap } from "rxjs/operators";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { User } from "../models/user";
 import { CURRENT_USER } from "../constants";
 import { Token } from "../models/token";
@@ -20,6 +20,16 @@ export class AuthService implements OnDestroy {
 
     ngOnDestroy(): void {
         this.currentUser$?.unsubscribe();
+    }
+
+    getCurrentUser() {
+        const cache = sessionStorage.getItem(CURRENT_USER);
+        if (cache) {
+            const currentUser: User = JSON.parse(cache);
+            return currentUser;
+        } else {
+            return undefined;
+        }
     }
 
     isTokenExpired(rawToken: string): boolean {
@@ -123,9 +133,13 @@ export class AuthService implements OnDestroy {
     }
 
     isLoggedIn(): boolean {
-        if (this.currentUser) {
-            if (this.currentUser.accessToken) {
-                return !this.isTokenExpired(this.currentUser.accessToken);
+        const cache = sessionStorage.getItem(CURRENT_USER);
+        if (cache) {
+            const currentUser: User = JSON.parse(cache);
+            if (currentUser) {
+                if (currentUser.accessToken) {
+                    return !this.isTokenExpired(currentUser.accessToken);
+                }
             }
         }
 

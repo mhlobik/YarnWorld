@@ -32,9 +32,7 @@ export class PatternAddEditComponent extends MessageComponent implements OnInit 
     @Output() dialogClosed = new EventEmitter<boolean>();
 
     isEdit = false;
-    submitted = false;
     loading = false;
-    error = false;
 
     categories: CategorySelection[] = [
         { id: 'category' + PatternCategoryEnum.Clothing, label: 'Clothing', enum: PatternCategoryEnum.Clothing },
@@ -74,42 +72,34 @@ export class PatternAddEditComponent extends MessageComponent implements OnInit 
     }
 
     savePattern() {
-        this.submitted = true;
         this.loading = true;
         if (this.pattern) {
-            this.error = !this.pattern.title || !this.pattern.description || !this.pattern.author || !this.pattern.image;
-            if (!this.error) {
-                if (this.isEdit) {
-                    this.patternService.updatePattern(this.pattern).subscribe({
-                        complete: () => {
-                            this.addMessageSuccess('Pattern Updated');
-                            this.loading = false;
-                            this.hideDialog();
-                        },
-                        error: () => {
-                            this.addMessageSuccess('Pattern has not been updated');
-                            this.error = true;
-                            this.loading = false;
-                        }
-                    });
-                } else {
-                    this.pattern.id = this.helperService.createId();
-                    this.patternService.createPattern(this.pattern).subscribe({
-                        complete: () => {
-                            this.addMessageSuccess('Pattern Created');
-                            this.loading = false;
-                            this.hideDialog();
-                        },
-                        error: () => {
-                            this.addMessageSuccess('Pattern has not been created');
-                            this.error = true;
-                            this.loading = false;
-                        }
-                    });
-                }
+            if (this.isEdit) {
+                this.patternService.updatePattern(this.pattern).subscribe({
+                    complete: () => {
+                        this.addMessageSuccess('Pattern Updated');
+                        this.loading = false;
+                        this.hideDialog();
+                    },
+                    error: () => {
+                        this.addMessageSuccess('Pattern has not been updated');
+                        this.loading = false;
+                    }
+                });
+            } else {
+                this.pattern.id = this.helperService.createId();
+                this.patternService.createPattern(this.pattern).subscribe({
+                    complete: () => {
+                        this.addMessageSuccess('Pattern Created');
+                        this.loading = false;
+                        this.hideDialog();
+                    },
+                    error: () => {
+                        this.addMessageSuccess('Pattern has not been created');
+                        this.loading = false;
+                    }
+                });
             }
-        } else {
-            this.error = true;
         }
     }
 
