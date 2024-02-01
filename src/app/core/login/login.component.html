@@ -2,7 +2,7 @@
     <form #form="ngForm" class="yarn-world-patterns-card flex flex-column p-fluid w-full md:w-6 text-primary-900">
         <div class="field w-full">
             <label for="email">Email</label>
-            <input type="text" pInputText id="email" name="mail" #mail="ngModel" [(ngModel)]="email" required autofocus
+            <input type="text" pInputText id="email" name="email" #mail="ngModel" [(ngModel)]="email" required autofocus
                 email (ngModelChange)="emailChanged(mail)" />
             <small class="p-error" *ngIf="emailError">Email is required.</small>
         </div>
