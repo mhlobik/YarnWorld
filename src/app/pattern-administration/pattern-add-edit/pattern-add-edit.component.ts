@@ -4,6 +4,7 @@ import { MessageComponent } from "../../core/message/message.component";
 import { PatternService } from "../../shared/services/pattern.service";
 import { PatternCategoryEnum } from "../../shared/models/pattern-category";
 import { PatternCraftTypeEnum } from "../../shared/models/pattern-craft-type";
+import { HelperService } from "../../shared/services/helper.service";
 
 export interface BaseSelection {
     id: string;
@@ -50,7 +51,7 @@ export class PatternAddEditComponent extends MessageComponent implements OnInit 
         { id: 'craftType' + PatternCraftTypeEnum.MachineKnitting, label: 'Machine Knitting', enum: PatternCraftTypeEnum.MachineKnitting }
     ]; // TODO  get from service
 
-    constructor(injector: Injector, private patternService: PatternService) {
+    constructor(injector: Injector, private patternService: PatternService, private helperService: HelperService) {
         super(injector);
     }
 
@@ -92,7 +93,7 @@ export class PatternAddEditComponent extends MessageComponent implements OnInit 
                         }
                     });
                 } else {
-                    this.pattern.id = this.createId();
+                    this.pattern.id = this.helperService.createId();
                     this.patternService.createPattern(this.pattern).subscribe({
                         complete: () => {
                             this.addMessageSuccess('Pattern Created');
@@ -112,22 +113,13 @@ export class PatternAddEditComponent extends MessageComponent implements OnInit 
         }
     }
 
-    createId(): string {
-        let id = '';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 10; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
-
     hideDialog() {
         this.openPatternDialog = false;
         this.dialogClosed.emit(true);
     }
 
     patternCategoryChanged(event: CategorySelection) {
-        if (this.pattern) {
+        if (this.pattern && event) {
             this.pattern = { ...this.pattern, category: event.enum };
         }
     }

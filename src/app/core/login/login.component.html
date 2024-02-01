@@ -3,18 +3,19 @@
         <div class="field w-full">
             <label for="email">Email</label>
             <input type="text" pInputText id="email" name="email" #mail="ngModel" [(ngModel)]="email" required autofocus
-                email (ngModelChange)="emailChanged(mail)" />
-            <small class="p-error" *ngIf="emailError">Email is required.</small>
+                email />
+            <small class="p-error" *ngIf="mail.invalid && (mail.dirty || mail.touched)">Email is required.</small>
         </div>
         <div class="field  w-full">
             <label for="password">Pasword</label>
             <input type="password" pInputText id="password" name="password" #pass="ngModel" [(ngModel)]="password"
-                required (ngModelChange)="passwordChanged(pass)" />
-            <small class="p-error" *ngIf="passwordError">Pasword is
+                required />
+            <small class="p-error" *ngIf="mail.invalid && (mail.dirty || mail.touched)">Pasword is
                 required.</small>
         </div>
         <button pButton pRipple label="Login" class="p-button-primary"
-            [disabled]="loading || passwordError || emailError || error" (click)="login()"
+            [disabled]="loading || form.invalid && (form.dirty || form.touched)" (click)="login()"
             (keydown.enter)="login()"></button>
+        <p>Don't have an account? <a class="text-primary-900" href="/signup">Signup now</a></p>
     </form>
 </div>

@@ -7,6 +7,7 @@ import { PatternAdministrationComponent } from './pattern-administration/pattern
 import { LoginComponent } from './core/login/login.component';
 import { LogoutComponent } from './core/logout/logout.component';
 import { AuthGuard } from './shared/services/auth-guard.service';
+import { SignupComponent } from './core/signup/signup.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
   },
   {
     path: 'logout',
