@@ -12,9 +12,6 @@ export class LoginComponent extends MessageComponent implements OnInit {
     email: string | undefined;
     password: string | undefined;
     loading = false;
-    emailError = false;
-    passwordError = false;
-    error = false;
     returnUrl: string | undefined;
 
     constructor(
@@ -43,27 +40,16 @@ export class LoginComponent extends MessageComponent implements OnInit {
         if (this.email && this.password) {
             this.authService.login(this.email, this.password).subscribe({
                 next: (user) => {
-                    this.loading = false; this.router.navigate(['/patterns']);
+                    this.loading = false;
+                    this.router.navigate(['/patterns']);
                 },
                 error: (err) => {
                     this.addMessageError(err);
-                    this.error = true;
                     this.loading = false;
                 }
             });
         } else {
-            this.error = true;
             this.loading = false;
         }
-    }
-
-    emailChanged(model: any) {
-        this.error = false;
-        this.emailError = model.invalid && (model.dirty || model.touched);
-    }
-
-    passwordChanged(model: any) {
-        this.error = false;
-        this.passwordError = model.invalid && (model.dirty || model.touched);
     }
 }

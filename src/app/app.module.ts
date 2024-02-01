@@ -22,6 +22,8 @@ import { UserService } from './shared/services/user.service';
 import { AuthService } from './shared/services/auth.service';
 import { AuthInterceptor } from "./shared/services/auth.interceptor";
 import { ErrorInterceptor } from './shared/services/error.interceptor';
+import { HelperService } from './shared/services/helper.service';
+import { SignupComponent } from './core/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ErrorInterceptor } from './shared/services/error.interceptor';
     PatternCraftTypeComponent,
     PatternAdministrationComponent,
     PatternAddEditComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,6 +54,7 @@ import { ErrorInterceptor } from './shared/services/error.interceptor';
     MessageService,
     UserService,
     AuthService,
+    HelperService
   ],
   bootstrap: [AppComponent]
 })

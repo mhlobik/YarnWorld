@@ -1,0 +1,34 @@
+<div class="flex justify-content-center p-5">
+    <form #form="ngForm" class="yarn-world-patterns-card flex flex-column p-fluid w-full md:w-6 text-primary-900">
+        <div class="field w-full">
+            <label for="firstName">First Name</label>
+            <input type="text" pInputText id="firstName" name="firstName" #fName="ngModel" [(ngModel)]="firstName"
+                required autofocus />
+            <small class="p-error" *ngIf="fName.invalid && (fName.dirty || fName.touched)">First Name is
+                required.</small>
+        </div>
+        <div class="field w-full">
+            <label for="lastName">Last Name</label>
+            <input type="text" pInputText id="lastName" name="lastName" #lName="ngModel" [(ngModel)]="lastName" required
+                autofocus />
+            <small class="p-error" *ngIf="lName.invalid && (lName.dirty || lName.touched)">Last Name is
+                required.</small>
+        </div>
+        <div class="field w-full">
+            <label for="email">Email</label>
+            <input type="text" pInputText id="email" name="email" #mail="ngModel" [(ngModel)]="email" required autofocus
+                email />
+            <small class="p-error" *ngIf="mail.invalid && (mail.dirty || mail.touched)">Email is required.</small>
+        </div>
+        <div class="field  w-full">
+            <label for="password">Pasword</label>
+            <input type="password" pInputText id="password" name="password" #pass="ngModel" [(ngModel)]="password"
+                required />
+            <small class="p-error" *ngIf="pass.invalid && (pass.dirty || pass.touched)">Pasword is
+                required.</small>
+        </div>
+        <button pButton pRipple label="Signup" class="p-button-primary"
+            [disabled]="loading || form.invalid && (form.dirty || form.touched)" (click)="signUp()"
+            (keydown.enter)="signUp()"></button>
+    </form>
+</div>

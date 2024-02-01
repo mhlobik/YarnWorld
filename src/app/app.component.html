@@ -8,7 +8,7 @@
       </a>
     </ng-template>
     <ng-template pTemplate="end">
-      <div class="flex align-items-center gap-2">
+      <div *ngIf="currentUser" class="flex align-items-center gap-2">
         <span *ngIf="currentUser" class="font-bold text-bluegray-50">{{currentUser.firstName}} {{
           currentUser.lastName}}</span>
         <button pButton class="p-button-rounded p-nutton-text p-button-raised p-button-neutral" icon="pi pi-user"

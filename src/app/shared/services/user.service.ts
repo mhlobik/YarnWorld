@@ -16,4 +16,20 @@ export class UserService {
             })
         );
     }
+
+    getUserByEmail(email: string): Observable<User[]> {
+        return this.http.get(this.apiPath + '?email=' + email).pipe(
+            catchError((error: any, caught: Observable<any>) => {
+                return throwError(() => error);
+            })
+        );
+    }
+
+    createUser(model: User): Observable<any> {
+        return this.http.post(this.apiPath, model).pipe(
+            catchError((error: any, caught: Observable<any>) => {
+                return throwError(() => error);
+            })
+        );
+    }
 }

@@ -1,20 +1,22 @@
-import { EventEmitter, Injectable, OnDestroy } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { User } from "../models/user";
-import { JwtHelperService } from "@auth0/angular-jwt";
 import { CURRENT_USER } from "../constants";
 import { Token } from "../models/token";
 import { Router } from "@angular/router";
+import { jwtDecode } from "jwt-decode";
+import { HelperService } from "./helper.service";
+import sign from "jwt-encode";
 
 @Injectable({ providedIn: "root" })
 export class AuthService implements OnDestroy {
     currentUser: User | undefined;
     apiPath = 'http://localhost:4000';
-    currentUser$ = new BehaviorSubject<User | null>(null);
+    currentUser$ = new BehaviorSubject<User | undefined>(undefined);
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, private helperService: HelperService) { }
 
     ngOnDestroy(): void {
         this.currentUser$?.unsubscribe();
@@ -22,9 +24,9 @@ export class AuthService implements OnDestroy {
 
     isTokenExpired(rawToken: string): boolean {
         if (rawToken) {
-            const helper = new JwtHelperService();
-            const isTokenExpired = helper.isTokenExpired(rawToken);
-            if (isTokenExpired) return true;
+            const decoded = jwtDecode(rawToken);
+            const exp = decoded.exp as number;
+            return Date.now() >= exp;
         }
         return false;
     }
@@ -45,25 +47,35 @@ export class AuthService implements OnDestroy {
             );
     }
 
-    getToken(user: User): Observable<User | null> {
+    /**
+     *  For purpose of this app we will have all tokens in database with 1 year of exp date to easier mock them
+     *  Call setToken() when user is created for the first time
+    **/
+    setToken(user: User): Observable<User | undefined> {
+        const newToken: Token = {
+            id: this.helperService.createId(),
+            userId: user.id,
+            accessToken: this.encodeJwt(user)
+        }
+        return this.http.post(this.apiPath + '/tokens', newToken).pipe(
+            catchError((error: any, caught: Observable<any>) => {
+                return throwError(() => error); // probably error Username or password is incorrect
+            })
+        );
+    }
+
+    getToken(user: User): Observable<User | undefined> {
         return this.http.get(this.apiPath + '/tokens?userId=' + user.id).pipe(
             catchError((error: any, caught: Observable<any>) => {
                 return throwError(() => error); // probably error Username or password is incorrect
             }),
             map((tokens: Token[]) => {
                 const accessToken = tokens[0].accessToken;
-                this.currentUser = {
-                    id: user.id,
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    role: user.role,
-                    accessToken
-                };
+                this.currentUser = this.decodeJwt(accessToken);
 
                 if (this.isTokenExpired(accessToken)) {
-                    this.currentUser$.next(null);
-                    return null;
+                    this.currentUser$.next(undefined);
+                    return undefined;
                 } else {
                     sessionStorage.setItem(
                         CURRENT_USER,
@@ -76,15 +88,45 @@ export class AuthService implements OnDestroy {
         );
     }
 
+    encodeJwt(user: User) {
+        const now = new Date();
+        const exp = new Date('29 January 2025 14:48 UTC');
+
+        const secret = 'secret';
+        const data = {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            role: user.role,
+            iat: now.toISOString(),
+            exp: exp.toISOString() // Jan 29, 2025 because we just want to mock this
+        };
+        const jwt = sign(data, secret);
+        return jwt;
+    }
+
+    decodeJwt(jwt: string): User | undefined {
+        const decoded: any = jwtDecode(jwt);
+        if (decoded) {
+            return {
+                id: decoded.id,
+                email: decoded.email,
+                firstName: decoded.firstName,
+                lastName: decoded.lastName,
+                role: decoded.role,
+                accessToken: jwt
+            };
+        } else {
+            return undefined;
+        }
+    }
+
     isLoggedIn(): boolean {
         if (this.currentUser) {
-            const helper = new JwtHelperService();
-            const rawToken = this.currentUser.accessToken;
-            if (rawToken) {
-                const isTokenExpired = helper.isTokenExpired(rawToken);
-                return !isTokenExpired;
+            if (this.currentUser.accessToken) {
+                return !this.isTokenExpired(this.currentUser.accessToken);
             }
-
         }
 
         this.logout();
@@ -93,7 +135,7 @@ export class AuthService implements OnDestroy {
 
     logout(navigate = false) {
         sessionStorage.removeItem(CURRENT_USER);
-        this.currentUser$.next(null);
+        this.currentUser$.next(undefined);
 
         if (navigate) {
             this.router.navigate(['/logout']);

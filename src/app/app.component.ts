@@ -25,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.currentUser = user;
         this.getMenuItems();
       } else {
+        this.currentUser = undefined;
         this.menuItems = [];
       }
     });
