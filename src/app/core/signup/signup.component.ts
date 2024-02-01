@@ -38,7 +38,7 @@ export class SignupComponent extends MessageComponent {
                 lastName: this.lastName,
                 email: this.email,
                 password: this.password,
-                role: 'admin'
+                role: 'user' // or 'admin' if you want to create admin, this should be allowed by administrator only
             };
 
             // First check if user with this email exists, if not create user
