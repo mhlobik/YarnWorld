@@ -36,10 +36,10 @@ import { ErrorInterceptor } from './shared/services/error.interceptor';
     LoginComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     PrimeNGModule,
-    HttpClientModule,
     FormsModule
   ],
   providers: [
