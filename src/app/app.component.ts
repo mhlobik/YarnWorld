@@ -20,13 +20,13 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser();
+    this.getMenuItems();
+
     this.currentUserSubscription = this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.currentUser = user;
         this.getMenuItems();
-      } else {
-        this.currentUser = undefined;
-        this.menuItems = [];
       }
     });
   }
@@ -37,17 +37,34 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getMenuItems() {
     if (this.currentUser?.role === 'admin') {
-      this.menuItems.push({
-        icon: 'pi pi-cog',
-        label: 'Pattern Administration',
-        command: () => this.router.navigate(['/pattern-administration'])
-      });
+      this.menuItems = [
+        {
+          icon: 'pi pi-cog',
+          label: 'Pattern Administration',
+          command: () => this.router.navigate(['/pattern-administration'])
+        },
+        {
+          icon: 'pi pi-cog',
+          label: 'Logout',
+          command: () => {
+            this.authService.logout(true);
+            this.currentUser = undefined;
+            this.menuItems = [];
+          }
+        }
+      ];
+    } else {
+      this.menuItems = [
+        {
+          icon: 'pi pi-cog',
+          label: 'Logout',
+          command: () => {
+            this.authService.logout(true);
+            this.currentUser = undefined;
+            this.menuItems = [];
+          }
+        }
+      ];
     }
-
-    this.menuItems.push({
-      icon: 'pi pi-cog',
-      label: 'Logout',
-      command: () => this.authService.logout(true)
-    });
   }
 }

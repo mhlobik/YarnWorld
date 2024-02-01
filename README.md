@@ -1,27 +1,52 @@
-# YarnWorld
+# Yarn World 
+Online Yarn Patterns Web Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.1.
+## Project Overview
 
-## Development server
+This web application is an online platform developed using Angular and the Primeng framework for components, designed specifically for yarn enthusiasts and crafters. It connects pattern authors with crafters to the world of yarn, crochet and knitting, allowing users to explore, search, and discover a wide variety of patterns. The application includes the following key features:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Features
 
-## Code scaffolding
+1. **Pattern Library**: Users can browse an extensive collection of patterns, including knitting, crochet, and other craft projects. Patterns are categorized by type.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+2. **Search for Patterns**: The application offers a search functionality, enabling users to find specific yarn patterns based on title or author.
 
-## Build
+3. **Pattern Details**: Users can access detailed information about each pattern, including images, pattern category or craft type. Users can also navigate to pattern url to get written instructions.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. **User Accounts**: Users need to create accounts to search patterns. More features comming...
+
+5. **Admin Panel (Authorized Users)**: Authorized administrators have access to an admin panel where they can manage the pattern library, add new patterns, and edit the content.
+
+### Technologies Used
+
+- **Angular**: The frontend of the application is developed using Angular 17.
+
+- **Primeng**: The PrimeNG framework provides a rich set of UI components, ensuring an intuitive and user-friendly interface for crafters. Version used is PrimeNG 17
+
+- **json-server**: The application uses a mock server using the json-server library to simulate API calls.
+
+- **Node.js**: Angular17 is compatible with Node.js version ^18.13.0 || ^20.9.0
+- **Jasmine and Karma**: Frameworks for unit testing Angular application
+
+
+### Getting Started
+
+To begin working on this project, follow these steps:
+
+1. **Clone the Repository**: Clone this GitHub repository to your local machine.
+
+2. **Install Dependencies**: Run `npm install` to install the project dependencies.
+
+3. **Development Server**: Start a development server with `ng serve`. The application will be available by default at `http://localhost:4200/`.
+
+4. **Mock Server**: To get response from API you need to start mock server. Open new terminal and start with ` npm run mock:api`. The mock server will be available at `http://localhost:4000/`.
+
+5. **Admin Access**: If you require access to the admin panel, please contact the project administrator for authentication.
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### License
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is open-source and released under the [MIT License](LICENSE).
