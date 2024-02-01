@@ -4,6 +4,9 @@ import { PrimeNGModule } from './primeng.module';
 import { PatternListComponent } from './patterns/pattern-list/pattern-list.component';
 import { PatternDetailsComponent } from './patterns/pattern-details/pattern-details.component';
 import { PatternAdministrationComponent } from './pattern-administration/pattern-administration.component';
+import { LoginComponent } from './core/login/login.component';
+import { LogoutComponent } from './core/logout/logout.component';
+import { AuthGuard } from './shared/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -14,17 +17,29 @@ const routes: Routes = [
   {
     path: 'patterns',
     component: PatternListComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: ':id',
-        component: PatternDetailsComponent
+        component: PatternDetailsComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },
   {
     path: 'pattern-administration',
-    component: PatternAdministrationComponent
-  }
+    component: PatternAdministrationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

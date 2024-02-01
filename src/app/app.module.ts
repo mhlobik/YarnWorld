@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PrimeNGModule } from './primeng.module';
 import { FormsModule } from '@angular/forms';
 
@@ -17,6 +17,11 @@ import { PatternCraftTypeComponent } from './patterns/pattern-craft-type/pattern
 import { PatternAdministrationComponent } from './pattern-administration/pattern-administration.component';
 
 import { ConfirmationService, MessageService } from "primeng/api";
+import { LoginComponent } from './core/login/login.component';
+import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
+import { AuthInterceptor } from "./shared/services/auth.interceptor";
+import { ErrorInterceptor } from './shared/services/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { ConfirmationService, MessageService } from "primeng/api";
     PatternCategoryComponent,
     PatternCraftTypeComponent,
     PatternAdministrationComponent,
-    PatternAddEditComponent
+    PatternAddEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +43,14 @@ import { ConfirmationService, MessageService } from "primeng/api";
     FormsModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
     PatternService,
     ConfirmationService,
-    MessageService
+    MessageService,
+    UserService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

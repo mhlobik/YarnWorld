@@ -21,5 +21,35 @@
       "author": "5 Knots North",
       "patternUrl": "https://5knotsnorth.blogspot.com/2018/08/the-lakeside-beanie.html"
     }
+  ],
+  "users": [
+    {
+      "id": "abcdefghij",
+      "firstName": "Pattern",
+      "lastName": "Administrator",
+      "email": "admin@test.com",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "abcde12345",
+      "firstName": "Base",
+      "lastName": "User",
+      "email": "baseuser@test.com",
+      "password": "user",
+      "role": "user"
+    }
+  ],
+  "tokens": [
+    {
+      "id": "qwertzuiop",
+      "userId": "abcdefghij",
+      "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJZYXJuIFdvcmxkIiwiaWF0IjoxNzA2NjQwNzkwLCJleHAiOjE3MzgxNzY3OTAsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsInN1YiI6ImFkbWluQHRlc3QuY29tIiwiZmlyc3ROYW1lIjoiUGF0dGVybiIsImxhc3ROYW1lIjoiQWRtaW5pc3RyYXRvciIsImVtYWlsIjoiYWRtaW5AdGVzdC5jb20iLCJyb2xlIjoiYWRtaW4ifQ.F1wT0Cvugl41pfYkJbBHSwaGYRaBUf6ZR3FzNSalQ3E"
+    },
+    {
+      "id": "qwertzu123",
+      "userId": "abcde12345",
+      "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJZYXJuIFdvcmxkIiwiaWF0IjoxNzA2NjQwNzkwLCJleHAiOjE3MzgxNzY3OTAsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCIsInN1YiI6ImJhc2V1c2VyQHRlc3QuY29tIiwiZmlyc3ROYW1lIjoiQmFzZSIsImxhc3ROYW1lIjoiVXNlciIsImVtYWlsIjoiYmFzZXVzZXJAdGVzdC5jb20iLCJyb2xlIjoidXNlciJ9.yMnUMQrdCiVpXlw4u-7t34-HfCq8zOYncALAYaVzT_Y"
+    }
   ]
 }
