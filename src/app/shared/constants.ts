@@ -1,0 +1,2 @@
+export const CURRENT_USER = "YARN_WORLD_CURRENT_USER";
+export const UNAUTHORIZED = 401;

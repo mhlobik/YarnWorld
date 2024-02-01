@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { PatternService } from "../../shared/services/pattern.service";
 import { BehaviorSubject, Observable, debounceTime, map, merge, of, startWith, switchMap, tap } from "rxjs";
 import { Pattern } from "../../shared/models/pattern";
@@ -8,13 +8,17 @@ import { Pattern } from "../../shared/models/pattern";
     templateUrl: './pattern-list.component.html',
     styleUrl: './pattern-list.component.scss'
 })
-export class PatternListComponent implements OnInit {
+export class PatternListComponent implements OnInit, OnDestroy {
     searchValue = '';
 
     patterns$: Observable<{ result: Pattern[], loading: boolean }> | undefined;
     patternsRequestEvent$ = new BehaviorSubject<string>('');
 
     constructor(private patternService: PatternService) { }
+
+    ngOnDestroy(): void {
+        this.patternsRequestEvent$?.unsubscribe();
+    }
 
     ngOnInit(): void {
         let patterns: Pattern[];
